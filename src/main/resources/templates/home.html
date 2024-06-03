@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en-US" xmlns="http://www.w3.org/1999/xhtml"
+                   xmlns:th="http://www.thymeleaf.org">
+    <head>
+    <title>Home - Special Offers</title>
+    <style>
+        .product {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .product img {
+            max-width: 150px;
+            margin-right: 20px;
+        }
+        .product-details {
+            flex-grow: 1;
+        }
+    </style>
+</head>
+<body>
+    <h1>Special Offers</h1>
+    <div th:if="${products.isEmpty()}">
+        <p>No products on special at the moment.</p>
+    </div>
+    <div th:if="${!products.isEmpty()}">
+        <div th:each="product : ${products}" class="product">
+            <img th:src="${product.imageUrl}" alt="Product Image"/>
+            <div class="product-details">
+                <h2 th:text="${product.name}">Product Name</h2>
+                <p th:text="${product.description}">Product Description</p>
+                <p>Price: $<span th:text="${product.price}">0.00</span></p>
+                <p>Available Quantity: <span th:text="${product.availableQuantity}">0</span></p>
+            </div>
+        </div>
+    </div>
+    <a th:href="@{/logout}">Logout</a>
+</body>
+</html>
+
